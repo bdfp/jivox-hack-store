@@ -12,7 +12,11 @@ var wishlist = {
         var query = mysql.format('INSERT INTO wishlist_details SET ?', wishlist);
         console.log('Query is',query);
         conn.query(query, (err, result) => {
-          cb(err);
+            if (!err) {
+                conn.release();
+            }
+            
+            cb(err);
         });
     });
   },
@@ -20,7 +24,6 @@ var wishlist = {
   getWishlist (userId, cb) {
     pool.getConnection((err, conn) => {
         if (err) {
-          
             cb(err, null);
             return;
         }
@@ -28,8 +31,10 @@ var wishlist = {
         var query = mysql.format('SELECT * FROM wishlist_details WHERE user_id = ?', userId);
         console.log('Query is',query);
         conn.query(query, (err, rows) => {
-          
-          cb(err, rows);
+            if (!err) {
+                conn.release();
+            }
+            cb(err, rows);
         });
     });
   }

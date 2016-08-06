@@ -54,7 +54,7 @@ var order = {
                         uorder_id: uorderId,
                         product_id: order.product_id,
                         vendor_id: order.vendor_id,
-                        state_id: 0//0 is sth at start
+                        state_id: 1//1 is sth at start
                     }, cb)
                 }, cb)
             }
