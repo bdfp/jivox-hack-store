@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     var wishlist = {
-        user_id: req.body.id,
+        user_id: req.body.userId,
         product_id: req.body.product_id
     };
     
@@ -41,3 +41,5 @@ router.post('/', (req, res) => {
         });
     }) 
 });
+
+module.exports = router;

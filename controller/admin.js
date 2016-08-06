@@ -18,7 +18,7 @@ var admin = {
             if (err) {
               cb(err);
             } else {
-              var query = mysql.format('INSERT INTO admin SET ?', admin);
+              var query = mysql.format('INSERT INTO vendor_details SET ?', admin);
               console.log('Query is',query);
               conn.query(query, (err, result) => {
                 
@@ -37,7 +37,7 @@ var admin = {
           conn.release();
           cb(err, null);
         } else {
-          var query = mysql.format('SELECT * FROM admin WHERE email = ?',[email]);
+          var query = mysql.format('SELECT * FROM vendor_details WHERE email = ?',[email]);
           console.log(query) ;
           conn.query(query , (err, rows) => {
               conn.release();
@@ -56,7 +56,7 @@ var admin = {
                 return;
             }
 
-            conn.query('SELECT id, name, email, phone FROM admin', (err, rows) => {
+            conn.query('SELECT id, name, email, phone FROM vendor_details', (err, rows) => {
                 conn.release();
                 if (err) {
                     return cb(err, null);

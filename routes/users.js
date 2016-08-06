@@ -39,7 +39,7 @@ router.post('/login', (req, res) => {
         delete user.password;
         
         var token = jwt.sign({
-            id: user.user_id
+            userId: user.user_id
         }, config.jwt.secret);
 
         res.json({

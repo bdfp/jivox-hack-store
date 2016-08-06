@@ -10,6 +10,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var config = require('./config');
+var util = require('./lib/util');
 
 var app = express();
 
@@ -27,20 +28,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/admin', require('./routes/admin'));
 
-app.use((req, res, next) => {
-    var token = req.header("Authorization");
-    jwt.verify(token, config.jwt.secret, (err, decoded) => {
-        if (err) {
-            res.json({
-                err: err
-            });
-            next();
-        } else {
-            req.body.id = decoded.id;
-            next();
-        }
-    });
+app.use('/consumer',(req, res, next) => {
+    util.jwtMiddleware(req, res, next, false);
+});
+
+app.use('/vendor', (req, res, next) => {
+    util.jwtMiddleware(req, res, next, true);
 });
 
 // catch 404 and forward to error handler
