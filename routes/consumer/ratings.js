@@ -11,7 +11,9 @@ router.post('/:productId', (req, res) => {
     var ratingDetails = {
       product_id : req.params.productId,
       user_id : req.body.user_id,
-        vendor_id : req.body.vendor_id
+        vendor_id : req.body.vendor_id,
+        rating : req.body.rating,
+        review : req.body.review
     };
     ratingCtrl.addRatingsByProductId(ratingDetails, (err) => {
         if (err) {
