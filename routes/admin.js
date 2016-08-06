@@ -25,7 +25,7 @@ router.post('/login', (req, res) => {
         delete admin.password;
 
         var token = jwt.sign({
-            vendorId: admin.vendor_id
+            vendor_id: admin.vendor_id
         }, config.jwt.secret);
 
         res.json({

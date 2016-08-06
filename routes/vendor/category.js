@@ -9,7 +9,7 @@ var catgCtrl = require('../../controller/category');
 router.post ('/', (req, res) => {
     var categoryDetails = {
         name : req.body.name,
-        vendor_id : req.body.vendorId
+        vendor_id : req.body.vendor_id
     };
     console.log(categoryDetails);
 
