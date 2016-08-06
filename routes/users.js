@@ -1,19 +1,51 @@
 var express = require('express');
 var router = express.Router();
+var jwt = require('jsonwebtoken');
 
 var user = require('../controller/users');
+var config = require('../config');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.post('/', function(req, res) {
+  user.getUser(req.body.email, (err, users) => {
+      if (err) {
+          res.json({
+              err: err
+          });
+          return
+      }
+
+      res.json({
+          users: users,
+          msg: "users retrieved"
+      });
+  });
 });
 
 router.post('/login', (req, res) => {
-    user.verifyUser(req.body.user, (err, user) => {
+    var userDetails = {
+        email: req.body.email,
+        password: req.body.password
+    };
+
+    user.verifyUser(userDetails, (err, user) => {
+        if (err) {
+            res.json({
+                err: err
+            });
+            return
+        }
+
         delete user.password;
+        
+        var token = jwt.sign({
+            userId: user.user_id
+        }, config.jwt.secret);
+
         res.json({
             msg: "login successful",
-            user: user
+            user: user,
+            token: token
         })
     })
 });

@@ -33,6 +33,6 @@ var wishlist = {
         });
     });
   }
-}
+};
 
 module.exports = wishlist;

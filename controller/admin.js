@@ -3,14 +3,14 @@ var bcrypt = require('bcrypt-nodejs');
 var mysql = require('mysql');
 
 var admin = {
-    addadmin (admin, cb) {
+    addAdmin (admin, cb) {
       if (!admin.email || !admin.password) {
         return cb("Params missing");
       }
 
       admin.password = bcrypt.hashSync(admin.password);
 
-      this.getadmin(admin.email, (err, admins) => {
+      this.getAdmin(admin.email, (err, admins) => {
         if(err || admins.length > 0) {
          cb(err || "admin already exists");
         } else if (admins.length === 0) {
@@ -18,7 +18,7 @@ var admin = {
             if (err) {
               cb(err);
             } else {
-              var query = mysql.format('INSERT INTO admin SET ?', admin);
+              var query = mysql.format('INSERT INTO vendor_details SET ?', admin);
               console.log('Query is',query);
               conn.query(query, (err, result) => {
                 
@@ -31,13 +31,13 @@ var admin = {
 
     },
 
-    getadmin (email, cb)  {
+    getAdmin (email, cb)  {
       pool.getConnection((err, conn) => {
         if (err) {
           conn.release();
           cb(err, null);
         } else {
-          var query = mysql.format('SELECT * FROM admin WHERE email = ?',[email]);
+          var query = mysql.format('SELECT * FROM vendor_details WHERE email = ?',[email]);
           console.log(query) ;
           conn.query(query , (err, rows) => {
               conn.release();
@@ -48,7 +48,7 @@ var admin = {
 
     },
 
-    getAlladmins (cb) {
+    getAllAdmins (cb) {
         pool.getConnection((err, conn) => {
             if (err) {
               conn.release();
@@ -56,7 +56,7 @@ var admin = {
                 return;
             }
 
-            conn.query('SELECT id, name, email, phone FROM admin', (err, rows) => {
+            conn.query('SELECT id, name, email, phone FROM vendor_details', (err, rows) => {
                 conn.release();
                 if (err) {
                     return cb(err, null);
@@ -67,8 +67,8 @@ var admin = {
         });
     },
 
-    verifyadmin (admin, cb) {
-      this.getadmin(admin.email, (err, admins) => {
+    verifyAdmin (admin, cb) {
+      this.getAdmin(admin.email, (err, admins) => {
         if(err) {
           cb(err, null);
         } else if(admins.length > 0) {
