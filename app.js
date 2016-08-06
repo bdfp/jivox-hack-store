@@ -29,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/admin', require('./routes/admin'));
+app.use('/getAllCategory', require('./routes/category'));
 
 app.use('/consumer',(req, res, next) => {
     util.jwtMiddleware(req, res, next, false);
@@ -37,6 +38,7 @@ app.use('/consumer',(req, res, next) => {
 app.use('/vendor', (req, res, next) => {
     util.jwtMiddleware(req, res, next, true);
 });
+app.use('/addCategory', require('./routes/category'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

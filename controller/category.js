@@ -9,7 +9,7 @@ var mysql = require('mysql');
 var category = {
 
     addCategory (category, cb) {
-        if (!category.name || !category.vendor_id) {
+        if (!category.name || !category.vendorId) {
             return cb("Parameter missing or unauthorized");
         }
         this.getCategory (category.name, (err, categories) => {
