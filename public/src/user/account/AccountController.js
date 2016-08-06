@@ -1,7 +1,7 @@
 (function  () {
-	'use strict'
+	'use strict';
 
-	angular.module('jivox')
+	angular.module('jivoxHack')
 		.controller('AccountController', function  ( Account, $state, $window ) {
 			var self = this;
 			

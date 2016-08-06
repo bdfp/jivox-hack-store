@@ -1,9 +1,8 @@
 (function  () {
-	'use strict'
+	'use strict';
 
-	angular.module('jivox')
-
-		.factory('Account', function  ($http, $window) {
+	angular.module('jivoxHack')
+		.factory('Account',['$http', '$window', function  ($http, $window) {
 
 			var token = null;
 			var id = null;
@@ -21,6 +20,8 @@
 							$window.localStorage.setItem('token' , token);
 							$window.localStorage.setItem('user_id' , id);
 							return response;
+						}).catch(function(reason){
+							console.log(reason);
 						})
 			}
 			function logout(){
@@ -55,7 +56,7 @@
 				isloggedIn : isloggedIn,
 				logout : logout
 			}
-		});
+		}]);
 
 	
 })();
