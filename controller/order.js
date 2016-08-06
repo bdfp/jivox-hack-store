@@ -5,6 +5,8 @@ var pool = require('../lib/pool').pool;
 var mysql = require('mysql');
 var async = require('async');
 
+var productCtrl = require('./product');
+
 var orderFunc = {
     addOrder (order, cb) {
         pool.getConnection((err, conn) => {
@@ -66,8 +68,9 @@ var orderFunc = {
                 return;
             }
         
-            var query = mysql.format('SELECT * FROM order_details WHERE ' +
-                'uorder_id = ?', uorderId);
+            var query = mysql.format('SELECT * FROM order_details AS o ' +
+                'INNER JOIN product_details AS p ON o.product_id = p.product_id ' +
+                'WHERE uorder_id = ?', uorderId);
             console.log('Query is',query);
             conn.query(query, (err, products) => {
                 if (err) {
@@ -114,5 +117,24 @@ module.exports = {
                 }, cb)
             }
         ], cb)
+    },
+    getVendorOrder (vendor_id, cb) {
+        pool.getConnection((err, conn) => {
+            if (err) {
+                cb(err, null);
+                return;
+            }
+
+            var query = mysql.format('SELECT * FROM order_details AS o ' +
+                'INNER JOIN product_details AS p ON o.product_id = p.product_id ' +
+                'WHERE o.vendor_id = ?', vendor_id);
+            console.log('Query is',query);
+            conn.query(query, (err, rows) => {
+                if (!err) {
+                    conn.release();
+                }
+                cb(err, rows);
+            });
+        });
     }
 };

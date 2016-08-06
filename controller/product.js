@@ -87,17 +87,17 @@ var product = {
                 (cb) => {
                     var query = mysql.format(
                         'SELECT * FROM product_details AS p ' +
-                        'WHERE p.product_id = ? ', productId);
+                        'WHERE p.product_id = ? LIMIT 1', productId);
                     console.log('Query is',query);
                     conn.query(query, (err, rows) => {
-                        cb(err, rows);
+                        cb(err, rows[0]);
                     });
                 },
-                (rows, cb) => {
-                    async.map(rows, (row, cb) => this.getPhotoUrl(row, conn, cb), cb)
+                (row, cb) => {
+                    this.getPhotoUrl(row, conn, cb);
                 },
-                (rows, cb) => {
-                    async.map(rows, (row, cb) => this.getRatings(row, conn, cb), cb)
+                (row, cb) => {
+                    this.getRatings(row, conn, cb);
                 }
             ], (err, res) => {
                 if (err) {
