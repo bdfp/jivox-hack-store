@@ -3,19 +3,25 @@
  */
 var pool = require('../lib/pool').pool;
 var mysql = require('mysql');
+var async = require('async');
 
 var product = {
     add (product, cb) {
        pool.getConnection((err, conn) => {
            if (err) {
-               cb(err);
+               cb(err, null);
                return;
            }
 
            var query = mysql.format('INSERT INTO product_details SET ?', product);
            console.log('Query is',query);
            conn.query(query, (err, result) => {
-             cb(err);
+               if (err) {
+                   cb(err, null);
+               } else {
+                   conn.release();
+                   cb(err, result.insertId);
+               }
            });
        });
     },
@@ -27,13 +33,46 @@ var product = {
                 return;
             }
 
-            var query = mysql.format('SELECT * FROM product_details AS p ' +
-                'INNER JOIN photo_details AS pd ON pd.product_id = p.product_id ' +
-                'WHERE p.category_id = ?', categoryId);
-            console.log('Query is',query);
-            conn.query(query, (err, rows) => {
-              cb(err, rows);
+            async.waterfall([
+                (cb) => {
+                    var query = mysql.format('SELECT * FROM product_details AS p ' +
+                        'WHERE p.category_id = ?', categoryId);
+                    console.log('Query is',query);
+                    conn.query(query, (err, rows) => {
+                        cb(err, rows);
+                    });
+                },
+                (rows, cb) => {
+                    async.map(rows, (row, cb) => this.getPhotoUrl(row, conn, cb), cb)
+                }
+            ], (err, res) => {
+                if (err) {
+                    cb(err, null);
+                } else {
+                    conn.release();
+                    cb(err, res);
+                }
             });
+        });
+    },
+
+    getPhotoUrl (product, conn, cb) {
+        var query = mysql.format('SELECT url FROM photo_details ' +
+            'WHERE product_id = ?', product.product_id);
+        console.log('Query is',query);
+        conn.query(query, (err, purls) => {
+            product.photos = purls;
+            cb(err, product);
+        });
+    },
+
+    getRatings (product, conn, cb) {
+        var query = mysql.format('SELECT * FROM rating_details ' +
+            'WHERE product_id = ?', product.product_id);
+        console.log('Query is',query);
+        conn.query(query, (err, ratings) => {
+            product.ratings = ratings;
+            cb(err, product);
         });
     },
 
@@ -44,14 +83,29 @@ var product = {
                 return;
             }
 
-            var query = mysql.format(
-                'SELECT * FROM product_details AS p ' +
-                'INNER JOIN photo_details AS pd ON pd.product_id = p.product_id ' +    
-                'INNER JOIN rating_details AS r ON p.product_id = r.product_id ' +
-                'WHERE product_id = ?', productId);
-            console.log('Query is',query);
-            conn.query(query, (err, rows) => {
-              cb(err, rows);
+            async.waterfall([
+                (cb) => {
+                    var query = mysql.format(
+                        'SELECT * FROM product_details AS p ' +
+                        'WHERE p.product_id = ? ', productId);
+                    console.log('Query is',query);
+                    conn.query(query, (err, rows) => {
+                        cb(err, rows);
+                    });
+                },
+                (rows, cb) => {
+                    async.map(rows, (row, cb) => this.getPhotoUrl(row, conn, cb), cb)
+                },
+                (rows, cb) => {
+                    async.map(rows, (row, cb) => this.getRatings(row, conn, cb), cb)
+                }
+            ], (err, res) => {
+                if (err) {
+                    cb(err, null);
+                } else {
+                    conn.release();
+                    cb(err, res);
+                }
             });
         });
     }

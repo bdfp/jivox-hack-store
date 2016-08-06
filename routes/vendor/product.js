@@ -26,18 +26,20 @@ router.post('/', (req, res) => {
         return
     }
 
-    async.parallel([
+    var photos = req.body.photos;
+    delete req.body.photos;
+
+    async.waterfall([
         (cb) => {
-            async.each(req.body.photos, (photoUrl, cb) => {
+            productCtrl.add(req.body, cb)
+        },
+        (prodId, cb) => {
+            async.each(photos, (photoUrl, cb) => {
                 photoCtrl.add({
                     url: photoUrl,
-                    product_id: req.body.product_id
+                    product_id: prodId
                 }, cb)
             }, cb)
-        },
-        (cb) => {
-            delete req.body.photos;
-            productCtrl.add(req.body, cb)
         }
     ], (err) => {
         if (err) {
