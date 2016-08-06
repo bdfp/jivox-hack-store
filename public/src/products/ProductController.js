@@ -14,7 +14,7 @@
 				console.log(reason);
 			});
 		self.addCart = function () {
-			$window.localStorage.setItem('cart',curProductId);
+			$window.localStorage.setItem('cart',self.productDetails);
 		};
 		self.addWish = function () {
 			Product.addToWishlist(curProductId)
@@ -39,6 +39,6 @@
 					console.log(reason);
 				});
 		};
-		
+
 	});
 })();
