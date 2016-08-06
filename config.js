@@ -2,7 +2,8 @@ module.exports = {
   database: {
     host: 'localhost',
     user: 'root',
-    password: 'morning_star',
+    password: 'root',
+    port : 8889,
     database: 'online_store'
   },
   jwt: {

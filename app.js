@@ -42,6 +42,7 @@ app.use('/vendor', (req, res, next) => {
 app.use('/category', require('./routes/consumer/category'));
 app.use('/vendor/category', require('./routes/vendor/category'));
 app.use('/consumer/ratings', require('./routes/consumer/ratings'));
+app.use('/consumer/wishlist', require('./routes/wishlist'));
 
 app.use('/products', require('./routes/consumer/product'));
 app.use('/vendor/products', require('./routes/vendor/product'));

@@ -9,9 +9,9 @@ var ratingCtrl = require('../../controller/ratings');
 
 router.post('/:productId', (req, res) => {
     var ratingDetails = {
-      productId : req.params.productId,
-      userId : req.body.userId,
-        vendorId : req.body.vendorId
+      product_id : req.params.productId,
+      user_id : req.body.user_id,
+        vendor_id : req.body.vendor_id
     };
     ratingCtrl.addRatingsByProductId(ratingDetails, (err) => {
         if (err) {
