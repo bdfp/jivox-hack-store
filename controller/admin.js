@@ -3,14 +3,14 @@ var bcrypt = require('bcrypt-nodejs');
 var mysql = require('mysql');
 
 var admin = {
-    addadmin (admin, cb) {
+    addAdmin (admin, cb) {
       if (!admin.email || !admin.password) {
         return cb("Params missing");
       }
 
       admin.password = bcrypt.hashSync(admin.password);
 
-      this.getadmin(admin.email, (err, admins) => {
+      this.getAdmin(admin.email, (err, admins) => {
         if(err || admins.length > 0) {
          cb(err || "admin already exists");
         } else if (admins.length === 0) {
@@ -31,7 +31,7 @@ var admin = {
 
     },
 
-    getadmin (email, cb)  {
+    getAdmin (email, cb)  {
       pool.getConnection((err, conn) => {
         if (err) {
           conn.release();
@@ -48,7 +48,7 @@ var admin = {
 
     },
 
-    getAlladmins (cb) {
+    getAllAdmins (cb) {
         pool.getConnection((err, conn) => {
             if (err) {
               conn.release();
@@ -67,8 +67,8 @@ var admin = {
         });
     },
 
-    verifyadmin (admin, cb) {
-      this.getadmin(admin.email, (err, admins) => {
+    verifyAdmin (admin, cb) {
+      this.getAdmin(admin.email, (err, admins) => {
         if(err) {
           cb(err, null);
         } else if(admins.length > 0) {

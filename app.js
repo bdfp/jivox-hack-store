@@ -4,9 +4,12 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var jwt = require('jsonwebtoken');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+
+var config = require('./config');
 
 var app = express();
 
@@ -24,6 +27,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+
+app.use((req, res, next) => {
+    var token = req.header("Authorization");
+    jwt.verify(token, config.jwt.secret, (err, decoded) => {
+        if (err) {
+            res.json({
+                err: err
+            });
+            next();
+        } else {
+            req.body.id = decoded.id;
+            next();
+        }
+    });
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
