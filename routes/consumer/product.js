@@ -34,7 +34,7 @@ router.get('/:productId', (req, res) => {
                 msg: "Products retrieved",
                 products: products
             });
-        }
+        }       
     })
 });
 
