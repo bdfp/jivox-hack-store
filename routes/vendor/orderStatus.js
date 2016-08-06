@@ -26,7 +26,7 @@ router.post('/', (req, res, next) => {
             });
         } else {
             res.json({
-                msg: "new order status added"
+                msg: "new orderFunc status added"
             });
         }
     });
@@ -40,7 +40,7 @@ router.get('/', (req, res, next) => {
             });
         } else {
             res.json({
-                msg: "order status retrieved",
+                msg: "orderFunc status retrieved",
                 status: statusList
             });
         }

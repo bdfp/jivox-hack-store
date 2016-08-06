@@ -33,4 +33,19 @@ router.post('/', (req, res) => {
     })
 });
 
+router.get("/", (req, res) => {
+    orderCtrl.getOrder(req.body.user_id, (err, rows)=> {
+        if(err) {
+            res.json({
+                err: err
+            })
+        } else {
+            res.json({
+                msg: "Orders retrieved",
+                orders: rows
+            })
+        }
+    })
+});
+
 module.exports = router;
