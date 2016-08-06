@@ -29,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //app.use('/', routes);
 app.use('/users', users);
 app.use('/admin', require('./routes/admin'));
+app.use('/ratings', require('./routes/ratings'));
 
 app.use('/consumer',(req, res, next) => {
     util.jwtMiddleware(req, res, next, false);
@@ -40,6 +41,7 @@ app.use('/vendor', (req, res, next) => {
 
 app.use('/category', require('./routes/consumer/category'));
 app.use('/vendor/category', require('./routes/vendor/category'));
+app.use('/consumer/ratings', require('./routes/consumer/ratings'));
 
 app.use('/products', require('./routes/consumer/product'));
 app.use('/vendor/products', require('./routes/vendor/product'));
