@@ -1,6 +1,6 @@
 module.exports = {
   database: {
-    host: '192.168.5.112',
+    host: 'localhost',
     user: 'root',
     password: 'morning_star',
     database: 'online_store'

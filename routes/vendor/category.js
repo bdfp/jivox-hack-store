@@ -8,11 +8,12 @@ var catgCtrl = require('../../controller/category');
 
 router.post ('/', (req, res) => {
     var categoryDetails = {
-        catgName : req.body.name,
-        vendorId : req.body.vendorId
+        name : req.body.name,
+        vendor_id : req.body.vendorId
     };
+    console.log(categoryDetails);
 
-    catgCtrl.addCategory (categoryDetails, (err) => {
+    catgCtrl.addCategory(categoryDetails, (err) => {
         if (err) {
             res.json({
                 err:err

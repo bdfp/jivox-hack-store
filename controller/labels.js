@@ -2,7 +2,7 @@
  * Created by raghav on 06/08/16.
  */
 
-var pool = require('../lib/pool');
+var pool = require('../lib/pool').pool;
 var mysql = require('mysql');
 
 

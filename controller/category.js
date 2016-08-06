@@ -2,14 +2,14 @@
  * Created by raghav on 06/08/16.
  */
 
-var pool = require('../lib/pool');
+var pool = require('../lib/pool').pool;
 var mysql = require('mysql');
 
 
 var category = {
 
     addCategory (category, cb) {
-        if (!category.name || !category.vendorId) {
+        if (!category.name || !category.vendor_id) {
             return cb("Parameter missing or unauthorized");
         }
         this.getCategory (category.name, (err, categories) => {
@@ -31,6 +31,7 @@ var category = {
         });
 
     },
+    
     getCategory (name, cb) {
         pool.getConnection((err, conn) => {
             if (err) {
