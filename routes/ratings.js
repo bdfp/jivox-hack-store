@@ -11,7 +11,6 @@ router.get('/:productId', (req, res) => {
     var ratingDetails = {
         product_id : req.params.productId
     };
-    console.log(ratingDetails);
     ratingCtrl.getRatingsByProductId(ratingDetails, (err, ratingList) => {
         if (err) {
             res.json({
