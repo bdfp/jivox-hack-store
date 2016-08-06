@@ -27,8 +27,9 @@ var product = {
                 return;
             }
 
-            var query = mysql.format('SELECT * FROM product_details WHERE ' +
-                'category_id = ?', categoryId);
+            var query = mysql.format('SELECT * FROM product_details AS p ' +
+                'INNER JOIN photo_details AS pd ON pd.product_id = p.product_id ' +
+                'WHERE p.category_id = ?', categoryId);
             console.log('Query is',query);
             conn.query(query, (err, rows) => {
               cb(err, rows);
@@ -44,7 +45,8 @@ var product = {
             }
 
             var query = mysql.format(
-                'SELECT * FROM product_details AS p' +
+                'SELECT * FROM product_details AS p ' +
+                'INNER JOIN photo_details AS pd ON pd.product_id = p.product_id ' +    
                 'INNER JOIN rating_details AS r ON p.product_id = r.product_id ' +
                 'WHERE product_id = ?', productId);
             console.log('Query is',query);
@@ -54,3 +56,5 @@ var product = {
         });
     }
 };
+
+module.exports = product;

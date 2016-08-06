@@ -41,6 +41,9 @@ app.use('/vendor', (req, res, next) => {
 app.use('/category', require('./routes/consumer/category'));
 app.use('/vendor/category', require('./routes/vendor/category'));
 
+app.use('/products', require('./routes/consumer/product'));
+app.use('/vendor/products', require('./routes/vendor/product'));
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
