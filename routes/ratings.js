@@ -9,8 +9,9 @@ var ratingCtrl = require('../controller/ratings');
 
 router.get('/:productId', (req, res) => {
     var ratingDetails = {
-        productId : req.params.productId
+        product_id : req.params.productId
     };
+    console.log(ratingDetails);
     ratingCtrl.getRatingsByProductId(ratingDetails, (err, ratingList) => {
         if (err) {
             res.json({
