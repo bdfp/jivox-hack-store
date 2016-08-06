@@ -34,7 +34,6 @@ var admin = {
     getAdmin (email, cb)  {
       pool.getConnection((err, conn) => {
         if (err) {
-          conn.release();
           cb(err, null);
         } else {
           var query = mysql.format('SELECT * FROM vendor_details WHERE email = ?',[email]);
@@ -51,7 +50,6 @@ var admin = {
     getAllAdmins (cb) {
         pool.getConnection((err, conn) => {
             if (err) {
-              conn.release();
                 cb(err, null);
                 return;
             }
