@@ -50,6 +50,9 @@ app.use('/consumer/address', require('./routes/consumer/address'));
 app.use('/products', require('./routes/consumer/product'));
 app.use('/vendor/products', require('./routes/vendor/product'));
 
+app.use('/consumer/orders', require('./routes/consumer/order'));
+app.use('/vendor/order-status', require('./routes/vendor/orderStatus'));
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
