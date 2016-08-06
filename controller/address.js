@@ -38,9 +38,7 @@ var address = {
                 var query = mysql.format("INSERT INTO address_details SET ?", params);
                 console.log(query);
                 conn.query(query, (err) => {
-                    if (!err) {
-                        conn.release();
-                    }
+                    conn.release();
                     cb(err);
                 });
             }
