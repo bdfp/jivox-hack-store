@@ -42,7 +42,7 @@
             <h3>Heading</h3>
             <p> Product description..here!!!</p>
             <p> for rating</p>
-            <p><a class="btn btn-default" href="#" role="button">View</a></p>
+            <p><a class="btn btn-default" href="#" role="button">View</a></p><!-- Get selected product here-->
             <p><a class="btn btn-default" href="#" role="button">Add to Cart</a></p>
             <p><a class="btn btn-default" href="#" role="button">Add to Wishlist</a></p>
           </div>
