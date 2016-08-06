@@ -8,7 +8,7 @@
 			self.message = "";
 
 			self.checkUserName = function () {
-				console.log("Function called");
+				
 				Account.getUserNames()
 						.then(function (response) {
 
@@ -41,8 +41,7 @@
 				var data = {
 					name: self.name,
 					password: self.password,
-					email: self.email,
-					phone: self.phone
+					email: self.email
 				};
 
 				Account.signUp(data)
@@ -54,6 +53,7 @@
 						}).then(function () {
 							$state.go('home');
 						}).catch(function (reason) {
+							console.log('During login!!');
 							console.log(reason);
 						})
 					})
