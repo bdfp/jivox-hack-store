@@ -36,11 +36,12 @@ var address = {
                 cb(err);
             } else {
                 var query = mysql.format("INSERT INTO address_details SET ?", params);
+                console.log(query);
                 conn.query(query, (err) => {
-                    conn.release();
-                    if (err) {
-                        cb(err);
+                    if (!err) {
+                        conn.release();
                     }
+                    cb(err);
                 });
             }
         });
