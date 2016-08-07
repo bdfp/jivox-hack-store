@@ -97,7 +97,7 @@ module.exports = {
             },
             (uorderId, cb) => {
                 async.each(orderDetails.orders, (order, cb) => {
-                    order.addProduct({
+                    orderFunc.addProduct({
                         uorder_id: uorderId,
                         product_id: order.product_id,
                         vendor_id: order.vendor_id,

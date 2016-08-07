@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('jivoxHack')
-		.controller('HomeController', function($http, Home, $window, $stateParams, Category, Wishlist){
+		.controller('HomeController', function($http, Home, $window, $state, Category, Wishlist, $rootScope){
 
 			var self = this;
 			
@@ -53,6 +53,6 @@
                     .catch(function (reason) {
                         console.log(reason);
                     });
-            }
+            };
 		});
 })();
