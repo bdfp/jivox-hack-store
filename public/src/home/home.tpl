@@ -65,7 +65,7 @@
       <h2>Choose category:</h2>
         <u class="list-group">
       
-          <li ng-repeat="each in home.catList" ui-href="category/{{each.category_id}}" class="list-group-item" value="{{each.category_id}}">{{each.name}}</li>
+          <li ng-repeat="each in home.catList" ui-sref="category({catId: each.category_id})" class="list-group-item" value="{{each.category_id}}">{{each.name}}</li>
         
       </u>
       </div>

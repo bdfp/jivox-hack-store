@@ -61,6 +61,11 @@
                     templateUrl: dir + 'products/products.tpl',
                     controller: 'ProductController as product'
                 })
+                .state('category', {
+                    url: '/category/:catId',
+                    templateUrl: dir + 'category/category.tpl',
+                    controller: 'CategoryController as category'
+                })
             ;
 
             $httpProvider.interceptors.push('authInterceptor');

@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('jivoxHack')
-		.controller('HomeController', function($http, Home, $window, $stateParams, Category, Wishlist){
+		.controller('HomeController', function($http, Home, $window, $state, Category, Wishlist, $rootScope){
 
 			var self = this;
 			
@@ -48,11 +48,11 @@
             self.search = function () {
                 Home.getSearch(self.query)
                     .then(function (response) {
-                        console.log(response);
+                        self.productList = response.data.productList;
                     })
                     .catch(function (reason) {
                         console.log(reason);
                     });
-            }
+            };
 		});
 })();
