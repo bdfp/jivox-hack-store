@@ -36,6 +36,7 @@
             <li><a href="#contact">Contact</a></li>
               <li><a ui-sref="wishlist">Wishlist</a> </li>
               <li ng-if="loggedIn"><a ui-sref="order">My Orders</a> </li>
+              <li ng-if="loggedIn"><a ui-sref="cart">My Cart</a> </li>
               <li ng-if="!loggedIn"><a ui-sref="account.login"><font color="white">Login</font></a></li>
             <li ng-if="loggedIn">
               <a ng-click="account.logout()" ui-sref-active="ak-active-tab" ui-sref="account.logout">

@@ -9,7 +9,9 @@
 					// body...
 				},
 				postWishes: function (pro_id) {
-					$http.post('/consumer/wishlist/' + pro_id);
+					return $http.post('/consumer/wishlist/', {
+						product_id: pro_id
+					});
 					// body...
 				}
 			};

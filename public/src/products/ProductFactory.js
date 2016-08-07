@@ -2,18 +2,18 @@
 	'use strict';
 
 	angular.module('jivoxHack')
-		.factory('Product',['$http' , '$window', function($http, $window) {
+		.factory('Product', function($http, $window) {
 			return{
 				getProductDetails: function (pro_id) {
 					return $http.get('/products/'+pro_id);
 				},
-				//addToWishlist: function (pro_id) {
-				//	return $http.post('/consumer/wishlist/'+pro_id); /*Should this be here or in the wishlist factory*/
-				//},
-				addRating: function (pro_id) {
-					return $http.post('/consumer/rating/'+pro_id);
+				addRating: function (pro_id,data) {
+					return $http.post('/consumer/ratings/'+pro_id,data);
+				},
+				getReview: function (pro_id) {
+					return $http.get('/ratings/' + pro_id);
 				}
 			}
 
-		}]);
-});
+		});
+})();

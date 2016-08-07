@@ -7,8 +7,8 @@
 				getOrders: function () {
 					return $http.get('/consumer/orders/');
 				},
-				postOrder: function (pro_id) {
-					return $http.post('/consumer/orders/'+ pro_id);
+				postOrder: function (data) {
+					return $http.post('/consumer/orders/', data);
 				}
 
 		}

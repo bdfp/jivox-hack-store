@@ -57,8 +57,8 @@
                     controller: 'HomeController as home'
                 })
                 .state('products',{
-                    url: '/products',
-                    templateUrl: dir + 'products/products.tpl',
+                    url: '/products/:prodId',
+                    templateUrl: dir + 'products/product.tpl',
                     controller: 'ProductController as product'
                 })
                 .state('category', {
