@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('jivoxHack', ['ui.router', 'toaster', 'ngAnimate'/*,'scDateTime'*/])
-        .config(function ($stateProvider, $urlRouterProvider) {
+        .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
             
             $urlRouterProvider.otherwise('/home');
 
@@ -61,8 +61,8 @@
                     templateUrl: dir + 'products/products.tpl',
                     controller: 'ProductController as product'
                 })
-
             ;
-        });
 
+            $httpProvider.interceptors.push('authInterceptor');
+        });
 })();

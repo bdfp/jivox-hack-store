@@ -6,7 +6,6 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-
     "async": "^2.0.1",
     "angular": "^1.5.8",
     "bcrypt-nodejs": "0.0.3",
@@ -31,5 +30,8 @@
     "mysql": "^2.11.1",
     "run-sequence": "^1.2.2",
     "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {
+    "gulp-connect": "^5.0.0"
   }
 }

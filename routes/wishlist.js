@@ -7,7 +7,8 @@ var router = express.Router();
 var wishlistCtrl = require('../controller/wishlist');
 
 router.get('/', (req, res) => {
-    console.log(req.body.user_id)
+    console.log(req.body.user_id);
+    
     wishlistCtrl.getWishlist(req.body.user_id, (err, wlist) => {
        if (err) {
            res.json({

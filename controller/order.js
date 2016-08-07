@@ -70,6 +70,7 @@ var orderFunc = {
         
             var query = mysql.format('SELECT * FROM order_details AS o ' +
                 'INNER JOIN product_details AS p ON o.product_id = p.product_id ' +
+                'INNER JOIN order_status_details AS osd ON osd.state_id = o.state_id ' +
                 'WHERE uorder_id = ?', uorderId);
             console.log('Query is',query);
             conn.query(query, (err, products) => {
