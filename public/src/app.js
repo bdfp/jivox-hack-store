@@ -2,14 +2,13 @@
     'use strict';
 
     angular.module('jivoxHack', ['ui.router', 'toaster', 'ngAnimate'/*,'scDateTime'*/])
-        .config(function ($stateProvider, $urlRouterProvider) {
+        .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
             
-            $urlRouterProvider.otherwise('/user');
+            $urlRouterProvider.otherwise('/home');
 
             var dir = 'src/';
 
             $stateProvider
-
                 .state('account', {
                     url: '/user',
                     templateUrl: dir + 'user/account/account.tpl',
@@ -62,8 +61,8 @@
                     templateUrl: dir + 'products/products.tpl',
                     controller: 'ProductController as product'
                 })
-
             ;
-        });
 
+            $httpProvider.interceptors.push('authInterceptor');
+        });
 })();

@@ -30,7 +30,7 @@ router.post('/login', (req, res) => {
 
     user.verifyUser(userDetails, (err, user) => {
         if (err) {
-            res.json({
+            res.status(403).json({
                 err: err
             });
             return

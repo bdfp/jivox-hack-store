@@ -2,12 +2,12 @@
 	'use strict';
 
 	angular.module('jivoxHack')
-		.controller('AccountController', function  ( Account, $state, $window ) {
+		.controller('AccountController', function  ( Account, $state, $window, $rootScope ) {
 			var self = this;
 			
-			self.loggedin = Account.isloggedIn();
+			$rootScope.loggedIn = Account.isLoggedInFunc();
 			
-			console.log(Account.isloggedIn());
+			console.log(Account.isloggedIn);
 
 			self.logout = function(){
 				Account.logout();

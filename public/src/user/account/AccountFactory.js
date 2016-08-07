@@ -7,32 +7,44 @@
 			var token = null;
 			var id = null;
 			
+			var isLoggedIn = false;
+			
 			function signUp (data) {
-				return $http.post('/users', data);
+				return $http.post('/users/signup', data);
 			}
 
 			function login (data) {
+                var self = this;
 				return $http.post('/users/login', data)
 						.then(function (response) {
 							console.log(response);
+                            self.isLoggedIn = true;
 							token = response.data.token;
 							id = response.data.id;
 							$window.localStorage.setItem('token' , token);
 							$window.localStorage.setItem('user_id' , id);
+                            console.log('isLoggedin', self.isLoggedIn);
 							return response;
 						}).catch(function(reason){
 							console.log(reason);
 						})
 			}
 			function logout(){
+                isLoggedIn = false;
 				return $window.localStorage.clear();
 
 			}
-			function isloggedIn(){
-				if(getToken() && getUserId())
-					return true;
-				else
-					return false;
+			function isLoggedInFunc(){
+				if(getToken() && getUserId()) {
+                    console.log('Logged in');
+                    isLoggedIn = true;
+                    return true;
+                }
+				else {
+                    console.log('no logged in');
+                    isLoggedIn = false;
+                    return false;
+                }
 			}
 			
 			function usernames () {
@@ -53,7 +65,8 @@
 				getUserNames: usernames,
 				getUserId : getUserId,
 				getToken: getToken,
-				isloggedIn : isloggedIn,
+				isLoggedIn : this.isLoggedIn,
+                isLoggedInFunc: isLoggedInFunc,
 				logout : logout
 			}
 		}]);

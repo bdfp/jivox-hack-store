@@ -2,10 +2,13 @@
 	'use strict'
 
 	angular.module('jivoxHack')
-		.controller('SignUpController', function  (Account, $state) {
+		.controller('SignUpController', function  (Account, $state, $rootScope) {
 			var self = this;
 			
 			self.message = "";
+			self.enable = false;
+			
+			$rootScope.isSignUp = true;
 
 			self.checkUserName = function () {
 				

@@ -12,7 +12,7 @@ var product = {
                cb(err, null);
                return;
            }
-
+           product.cum_rating = 0;
            var query = mysql.format('INSERT INTO product_details SET ?', product);
            console.log('Query is',query);
            conn.query(query, (err, result) => {

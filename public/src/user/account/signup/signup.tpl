@@ -3,14 +3,14 @@
 
   <h2 class="form-signin-heading">Sign Up Page</h2>
 
-  <div class="alert alert-warning" data-ng-bind= "signup.message">
+  <div ng-hide="!signup.enable" class="alert alert-warning" data-ng-bind= "signup.message">
     
   </div>
 
   <label for="inputName" class="sr-only" >Your Name</label>
   <input data-ng-model="signup.name" type="text" id="inputName" class="form-control" placeholder="Name" required>
   <label for="inputEmail" class="sr-only">Email address</label>
-  <input data-ng-model="signup.email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+  <input data-ng-model="signup.email" type="text" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
   <label for="inputPassword" class="sr-only">Password</label>
   <input data-ng-model="signup.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
   <div class="checkbox">

@@ -2,7 +2,7 @@
 	'use strict';
 	// body...
 	angular.module('jivoxHack')
-		.controller('OrderController', function ($http, $window, $stateParams) {
+		.controller('OrderController', function (Order, $window, $stateParams) {
 			var self = this;
 			self.allOrders = null;
 			Order.getOrders()
