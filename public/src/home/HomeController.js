@@ -66,7 +66,8 @@
             self.search = function () {
                 Home.getSearch(self.query)
                     .then(function (response) {
-                        self.productList = response.data.productList;
+                    	console.log("search",response);
+                        self.prodlist = response.data.productList;
                     })
                     .catch(function (reason) {
                         console.log(reason);

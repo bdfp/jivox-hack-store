@@ -5,7 +5,7 @@
 		.factory("Cart",function($http, $window) {
 			return {
 				addToCart: function(pro_id) {
-					var cartList = $window.localStorage.getItem('cart');
+					var cartList = JSON.parse($window.localStorage.getItem('cart'));
 					
 					if (!cartList) 
 						cartList = [];
