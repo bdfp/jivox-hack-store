@@ -32,6 +32,7 @@ app.use('/admin', require('./routes/admin'));
 
 // don't use this api
 app.use('/ratings', require('./routes/ratings'));
+app.use('/search', require('./routes/search'));
 
 app.use('/consumer',(req, res, next) => {
     util.jwtMiddleware(req, res, next, false);
