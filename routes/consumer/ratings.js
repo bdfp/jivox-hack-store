@@ -9,13 +9,13 @@ var ratingCtrl = require('../../controller/ratings');
 
 router.post('/:productId', (req, res) => {
     var ratingDetails = {
-      product_id : req.params.productId,
-      user_id : req.body.user_id,
+        product_id : req.params.productId,
+        user_id : req.body.user_id,
         vendor_id : req.body.vendor_id,
         rating : req.body.rating,
         review : req.body.review
     };
-    ratingCtrl.addRatingsByProductId(ratingDetails, (err) => {
+    ratingCtrl.setRatings(ratingDetails, (err) => {
         if (err) {
             res.json({
                 err:err
