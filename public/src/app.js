@@ -4,12 +4,11 @@
     angular.module('jivoxHack', ['ui.router', 'toaster', 'ngAnimate'/*,'scDateTime'*/])
         .config(function ($stateProvider, $urlRouterProvider) {
             
-            $urlRouterProvider.otherwise('/user');
+            $urlRouterProvider.otherwise('/home');
 
             var dir = 'src/';
 
             $stateProvider
-
                 .state('account', {
                     url: '/user',
                     templateUrl: dir + 'user/account/account.tpl',

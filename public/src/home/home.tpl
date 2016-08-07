@@ -1,4 +1,4 @@
-
+<div ng-controller="HomeController as home">
       <div class="row row-offcanvas row-offcanvas-right">
 
         <div class="col-xs-12 col-sm-9">
@@ -13,11 +13,11 @@
 
             <div class="carousel-inner" role="listbox">
               <div class="item active">
-                <img src=".jpg">
+               <!-- <img src=".jpg">-->
             </div>
 
             <div class="item">
-              <img src=".jpg" >
+    <!-- <img src=".jpg">-->
             </div>
           </div>
 
@@ -51,3 +51,4 @@
         </div>
       </div>
     </div>
+</div>

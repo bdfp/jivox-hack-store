@@ -1,9 +1,9 @@
 <div ng-controller="AccountController as account">
 <ul class="nav nav-tabs">
-  <li class="active">
+  <li ng-class="{'active': !isSignUp}">
   	<a ui-sref-active="ak-active-tab" ui-sref="account.login">Log In</a>
   </li>
-  <li>
+  <li ng-class="{'active': isSignUp}">
   	<a ui-sref-active="ak-active-tab" ui-sref="account.signup" >Sign Up</a>
   </li>
 </ul>

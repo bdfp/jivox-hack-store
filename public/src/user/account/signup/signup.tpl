@@ -3,7 +3,7 @@
 
   <h2 class="form-signin-heading">Sign Up Page</h2>
 
-  <div class="alert alert-warning" data-ng-bind= "signup.message">
+  <div ng-hide="!signup.enable" class="alert alert-warning" data-ng-bind= "signup.message">
     
   </div>
 
