@@ -1,4 +1,4 @@
-<div>
+<div ng-controller="AccountController as account">
 <ul class="nav nav-tabs">
   <li class="active">
   	<a ui-sref-active="ak-active-tab" ui-sref="account.login">Log In</a>

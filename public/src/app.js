@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('jivoxHack', ['ui.router', 'toaster', 'ngAnimate','scDateTime'])
+    angular.module('jivoxHack', ['ui.router', 'toaster', 'ngAnimate'/*,'scDateTime'*/])
         .config(function ($stateProvider, $urlRouterProvider) {
             
             $urlRouterProvider.otherwise('/user');

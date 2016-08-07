@@ -2,5 +2,5 @@
 	'use strict';
 
 	angular.module('jivoxHack')
-		.controller('HomeController')
+		.controller('HomeController',function())
 })

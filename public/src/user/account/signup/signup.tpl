@@ -1,3 +1,4 @@
+<div ng-controller="SignUpController as signup">
 <form class="form-signin" ng-submit="signup.submit()">
 
   <h2 class="form-signin-heading">Sign Up Page</h2>
@@ -19,3 +20,5 @@
   </div>
   <button ng-disabled="signup.enable" class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
 </form>
+
+</div>

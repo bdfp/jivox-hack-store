@@ -1,3 +1,4 @@
+<div ng-controller="LoginController as login">
 <form ng-submit = "login.submit()" class="form-signin">
 
   <h2 class="form-signin-heading">Login</h2>
@@ -17,3 +18,4 @@
     <!-- Error Message here!! -->
   </div>
 </form>
+</div>
