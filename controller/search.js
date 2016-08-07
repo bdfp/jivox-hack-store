@@ -5,6 +5,8 @@ var pool = require('../lib/pool').pool;
 var mysql = require('mysql');
 var async = require('async');
 
+
+var productsCtrl = require('./product');
 var category = require('./category');
 
 
@@ -50,13 +52,19 @@ var search = {
                         if (err) {
                             cb(err,null);
                         } else {
-                            cb(null,products);
+                            var prodId;
+                            prodId = products.map((obj) => {
+                                return obj.product_id;
+                            });
+
+                            async.map(products, (prod, cb) => {
+                                productsCtrl.getPhotoUrl(prod, null, cb)
+                            }, cb);
+
+                            //cb(null,products);
                         }
                 });
         });
-
-
-
     },
 
     getProductDetails(result, cb) {
@@ -69,13 +77,14 @@ var search = {
                         if (err) {
                             cb(err, null);
                         } else {
-                            console.log("Rows",rows);
-                            cb(null, rows);
+                            console.log("Rows", rows);
+                            cb(err, rows[0]);
                         }
                });
            }
         });
     },
+
 
     getCategory (cb) {
         pool.getConnection((err, conn) => {
