@@ -1,12 +1,11 @@
 <div ng-controller="HomeController as home">
       <div class="row row-offcanvas row-offcanvas-right">
           <div class="row">
-            <h2>Category Search</h2>
             <div id="custom-search-input">
               <div class="input-group col-md-12">
-                <input type="text" class="  search-query form-control" placeholder="Search" />
+                <input ng-model="home.query" type="text" class="  search-query form-control" placeholder="Search" />
               <span class="input-group-btn">
-                <button class="btn btn-danger" type="button">
+                <button ng-click="home.search()" class="btn btn-danger" type="button">
                   <span class=" glyphicon glyphicon-search"></span>
                 </button>
               </span>
@@ -64,7 +63,7 @@
       <h2>Choose category:</h2>
         <u class="list-group">
       
-          <li ng-repeat="each in home.catList" ui-href="category/{{each.category_id}}" class="list-group-item" value="{{each.category_id}}">{{each.name}}</li>
+          <li ng-repeat="each in home.catList" ui-sref="category({catId: each.category_id})" class="list-group-item" value="{{each.category_id}}">{{each.name}}</li>
         
       </u>
       </div>

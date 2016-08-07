@@ -4,10 +4,10 @@
 
 var pool = require('../lib/pool').pool;
 var mysql = require('mysql');
+var async = require('async');
 
 var ratings = {
       getRatingsByProductId (params, cb) {
-          console.log(params.product_id)
           if (!params.product_id) {
               return cb("Parameter missing");
           }
@@ -30,25 +30,66 @@ var ratings = {
           });
       },
 
-    addRatingsByProductId (params, cb) {
-        if (!params.product_id || !params.user_id) {
-            return cb("Parameter missing or unauthorized");
-        }
+      addRatingsByProductId (params, cb) {
+          if (!params.product_id || !params.user_id) {
+              return cb("Parameter missing or unauthorized");
+          }
+          pool.getConnection((err, conn) => {
+              if (err) {
+                  cb(err);
+              } else {
+                  var query = mysql.format("INSERT INTO rating_details SET ?", params);
+                  conn.query(query, (err, rows) => {
+                      conn.release();
+                      if (err) {
+                          cb(err);
+                      } else {
+                          cb(null, rows);
+                      }
+                  })
+              }
+          });
+      },
+    getTotalRatings (params, cb) {
         pool.getConnection((err, conn) => {
-           if (err){
-               cb(err);
-           } else {
-               var query = mysql.format("INSERT INTO rating_details SET ?", params);
-               conn.query(query, (err, rows) => {
-                   conn.release();
-                   if (err) {
-                       cb(err);
-                   } else {
-                       cb(null, rows);
-                   }
-               })
-           }
+            if (err) {
+                cb(err, null);
+            } else {
+                var query = mysql.format("SELECT sum(rating) AS sum, count(rating) AS count FROM rating_details " +
+                    "WHERE product_id = ?", params.product_id);
+                conn.query(query, (err, rows) => {
+                    conn.release();
+                    console.log("Sum" ,rows);
+                    cb(err, rows[0], params);
+                })
+            }
         });
+    },
+    updateRating (rating, params, cb) {
+        pool.getConnection((err, conn) => {
+            if (err) {
+                cb(err);
+            } else {
+                rating.sum += params.rating;
+                rating.count += 1;
+                var avg = parseFloat(rating.sum) / parseFloat(rating.count - 1);
+                var query = mysql.format("UPDATE product_details SET cum_rating = ? where product_id = ?",
+                    [avg, params.product_id]);
+                conn.query(query, (err, rows) => {
+                    conn.release();
+                        cb(err);
+
+                })
+            }
+        });
+    },
+
+    setRatings (param, cb) {
+        async.waterfall ([
+            (cb) => this.addRatingsByProductId(param, cb),
+            (row, cb) => this.getTotalRatings(param, cb),
+            (row, param, cb) => this.updateRating(row, param, cb)
+        ], cb);
     }
 };
 

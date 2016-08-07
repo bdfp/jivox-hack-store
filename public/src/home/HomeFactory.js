@@ -6,9 +6,12 @@
 			return{
 				getCategories : function() {
 					return $http.get('/category');
+				},
+				getSearch: function (query) {
+					return $http.post('/search', {
+						search_query: query
+					});
 				}
 			};
-			
-
 		}]);
 })();

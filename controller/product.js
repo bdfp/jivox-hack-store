@@ -14,7 +14,6 @@ var product = {
            }
            product.cum_rating = 0;
            var query = mysql.format('INSERT INTO product_details SET ?', product);
-           console.log('Query is',query);
            conn.query(query, (err, result) => {
                if (err) {
                    cb(err, null);
@@ -57,13 +56,27 @@ var product = {
     },
 
     getPhotoUrl (product, conn, cb) {
-        var query = mysql.format('SELECT url FROM photo_details ' +
-            'WHERE product_id = ?', product.product_id);
-        console.log('Query is',query);
-        conn.query(query, (err, purls) => {
-            product.photos = purls;
-            cb(err, product);
-        });
+        if (conn == null) {
+            pool.getConnection((err, conn) => {
+                if (err) {
+                    cb(err, null);
+                    return;
+                }
+                getPhoto(conn);
+            });
+        } else {
+            getPhoto(conn);
+        }
+
+        function getPhoto(conn) {
+            var query = mysql.format('SELECT url FROM photo_details ' +
+                'WHERE product_id = ?', product.product_id);
+            console.log('Query is',query);
+            conn.query(query, (err, purls) => {
+                product.photos = purls;
+                cb(err, product);
+            });
+        }
     },
 
     getRatings (product, conn, cb) {

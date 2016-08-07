@@ -31,6 +31,7 @@
 					});
 
 			};
+
 			self.addToCart = function(pro_id) {
 				Cart.addToCart(pro_id);
 			};
@@ -62,5 +63,14 @@
 			$state.go('products');
 		};
 
+            self.search = function () {
+                Home.getSearch(self.query)
+                    .then(function (response) {
+                        self.productList = response.data.productList;
+                    })
+                    .catch(function (reason) {
+                        console.log(reason);
+                    });
+            };
 		});
 })();
