@@ -51,11 +51,14 @@
             <h3>{{prod.name}}</h3>
             <p> {{prod.description}}</p>
             <p> {{prod.cum_rating}}</p>
+            <label> Cost </label>
+            <p>{{prod.cost | currency: '&#8377;'}}</p>
             <!-- {{prod.product_id}} -->
             <p><a class="btn btn-default"  ui-sref = "products({prodId: prod.product_id})" role="button">View</a></p>
             <p><a class="btn btn-default" ng-click = "home.addToCart(prod.product_id)" role="button">Add to Cart</a></p>
             <p><a class="btn btn-default" ng-click = "home.addToWishlist(prod.product_id)" role="button">Add to Wishlist</a></p>
           </div>
+      
           </div> 
         </div>
       

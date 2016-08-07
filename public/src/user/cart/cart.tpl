@@ -8,7 +8,9 @@
             <h3>{{prod.name}}</h3>
             <p> {{prod.description}}</p>
             <p> {{prod.cum_rating}}</p>
-            <p><a class="btn btn-default" ui-href="product/{{prod.product_id}}" role="button">View</a></p>
+            <label> Cost </label>
+  			<p>{{prod.cost | currency: '&#8377;'}}</p>
+            <p><a class="btn btn-default" ui-sref="products({prodId: prod.product_id})" role="button">View</a></p>
           </div>
           </div> 
         

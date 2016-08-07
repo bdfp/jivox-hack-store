@@ -8,7 +8,8 @@
 	<br>
   <label> Rating </label>
   <p>{{product.productDetails.cum_rating}}</p>
-  <p>{{product.productDetails.cost}}</p>
+   <label> Cost </label>
+  <p>{{product.productDetails.cost | currency: '&#8377;'}}</p>
 	<p>
 		<a class="btn btn-default" ng-click = "product.addCart()" >Add to cart</a>
 		<a class="btn btn-default" ng-click = "product.addWish()" >Add to Wishlist</a>
