@@ -10,10 +10,10 @@
                 Account.login({
                     email: self.email,
                     password: self.password
-                }).then(function () {
+                }).then(function (response) {
+                    console.log(response);
                     $state.go('home');
                 }).catch(function (reason) {
-                    
                     console.log(reason);
                     self.Message = reason;
                 })

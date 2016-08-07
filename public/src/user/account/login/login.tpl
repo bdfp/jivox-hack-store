@@ -4,7 +4,7 @@
   <h2 class="form-signin-heading">Login</h2>
   
   <label for="inputEmail" class="sr-only">Email address</label>
-  <input data-ng-model="login.email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+  <input data-ng-model="login.email" type="text" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
   <label for="inputPassword" class="sr-only">Password</label>
   <input data-ng-model="login.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
   <!-- 

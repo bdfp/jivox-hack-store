@@ -8,7 +8,7 @@
 			var id = null;
 			
 			function signUp (data) {
-				return $http.post('/users', data);
+				return $http.post('/users/signup', data);
 			}
 
 			function login (data) {
