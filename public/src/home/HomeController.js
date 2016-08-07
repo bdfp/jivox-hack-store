@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('jivoxHack')
-		.controller('HomeController', function($http, Home, $window, $stateParams, Category, Wishlist){
+		.controller('HomeController', function($http, Home, $window, $stateParams, Category, Wishlist, Cart){
 
 			var self = this;
 			
@@ -32,8 +32,7 @@
 
 			};
 			self.addToCart = function(pro_id) {
-				$window.localStorage.setItem('cart',pro_id);
-
+				Cart.addToCart(pro_id);
 			};
 			self.addToWishlist = function (pro_id){
 
@@ -44,7 +43,7 @@
 						console.log(reason);
 					});
 			};
-	for (var i = 3; i >= 0; i--) {
+		for (var i = 3; i >= 0; i--) {
 			 		 
 			Category.getCategoryProducts(i)
 			.then(function(response){
