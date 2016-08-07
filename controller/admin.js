@@ -3,6 +3,9 @@ var bcrypt = require('bcrypt-nodejs');
 var mysql = require('mysql');
 
 var admin = {
+    /*
+    add Admin for controlling various functions
+     */
     addAdmin (admin, cb) {
       if (!admin.email || !admin.password) {
         return cb("Params missing");

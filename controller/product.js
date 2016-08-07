@@ -14,7 +14,6 @@ var product = {
            }
            product.cum_rating = 0;
            var query = mysql.format('INSERT INTO product_details SET ?', product);
-           console.log('Query is',query);
            conn.query(query, (err, result) => {
                if (err) {
                    cb(err, null);
