@@ -7,6 +7,7 @@
 			var self = this;
 			
 			self.catList = null;
+			self.prodlist = [];
 			
 			Home.getCategories()
 				.then(function(response){
@@ -17,7 +18,7 @@
 				});
 			
 			self.times = function(n){
-				return n;
+				return new Array(n);
 			};
 			
 			self.getCatProd = function(cat_id){
@@ -35,12 +36,26 @@
 
 			};
 			self.addToWishlist = function (pro_id){
-				Wishlist.postWishes()
+
+				Wishlist.postWishes(pro_id)
 					.then(function(response){
 						console.log(response);
 					}).catch(function(reason){
 						console.log(reason);
 					});
 			};
+	for (var i = 3; i >= 0; i--) {
+			 		 
+			Category.getCategoryProducts(i)
+			.then(function(response){
+					console.log(response);
+					for(var i = 0; i < response.data.products.length ;i++ ) {
+						self.prodlist.push(response.data.products[i]);
+						//console.log(self.prodlist);
+					}
+				}).catch(function(reason){
+					console.log(reason);
+				});
+		}
 		});
 })();

@@ -44,24 +44,22 @@
           <!--</a>-->
         <!--</div>-->
         <div class="row">
-        <div ng-repeat="times in home.times(2)">
-        <div ng-repeat="each in home.catList">
-          <div ng-repeat = "t in home.times(3)">
-          <div class="col-xs-6 col-lg-4" ng-repeat = "prods in Home.getCatProd({{each.category_id}})">
+        
+        
+          <div class="col-xs-6 col-lg-4" ng-repeat = "prod in home.prodlist">
             
-            <img src="{{prod.imgUrl}}">
+            <img src="{{prod.photos[0].url}}" height="200" width="200">
             <h3>{{prod.name}}</h3>
-            <p> {{prod.desc}}</p>
-            <p> {{prod.rating}}</p>
+            <p> {{prod.description}}</p>
+            <p> {{prod.cum_rating}}</p>
+            <!-- {{prod.product_id}} -->
             <p><a class="btn btn-default" ui-href="product/{{prod.product_id}}" role="button">View</a></p>
-            <p><a class="btn btn-default" ng-click = "home.addToCart({{prod.product_id}})" role="button">Add to Cart</a></p>
-            <p><a class="btn btn-default" ng-click = "home.addToWishlist({{prod.product_id}})" role="button">Add to Wishlist</a></p>
+            <p><a class="btn btn-default" ng-click = "home.addToCart(prod.product_id)" role="button">Add to Cart</a></p>
+            <p><a class="btn btn-default" ng-click = "home.addToWishlist(prod.product_id)" role="button">Add to Wishlist</a></p>
           </div>
           </div> 
         </div>
-      </div>
-      </div>
-</div>
+      
       <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
       <h2>Choose category:</h2>
         <u class="list-group">
