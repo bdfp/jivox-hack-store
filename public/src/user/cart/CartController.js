@@ -26,7 +26,9 @@
 				}
 			}	
 			self.order = function() {
-				Order.postOrder(orderList)
+				Order.postOrder({
+					orders: orderList
+				})
 					.then(function(response){
 						console.log(response);
 					}).catch(function(reason){

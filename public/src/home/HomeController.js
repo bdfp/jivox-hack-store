@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('jivoxHack')
-		.controller('HomeController', function($http, Home, $window, $stateParams, Category, Wishlist, Cart){
+		.controller('HomeController', function($state,$http, Home, $window, $stateParams, Category, Wishlist, Cart,$rootScope){
 
 			var self = this;
 			
@@ -56,5 +56,11 @@
 					console.log(reason);
 				});
 		}
+		self.viewProd = function(pro_id){
+			console.log(pro_id);
+			$rootScope.curProdId = pro_id;
+			$state.go('products');
+		};
+
 		});
 })();
