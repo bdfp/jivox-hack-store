@@ -55,7 +55,7 @@ var ratings = {
             if (err) {
                 cb(err, null);
             } else {
-                var query = mysql.format("SELECT sum(rating) AS sum, count(rating) AS count FROM rating_details " +
+                var query = mysql.format("SELECT sum(rating) AS sum, count(rating) AS co FROM rating_details " +
                     "WHERE product_id = ?", params.product_id);
                 conn.query(query, (err, rows) => {
                     conn.release();
@@ -70,9 +70,7 @@ var ratings = {
             if (err) {
                 cb(err);
             } else {
-                rating.sum += params.rating;
-                rating.count += 1;
-                var avg = parseFloat(rating.sum) / parseFloat(rating.count - 1);
+                var avg = parseFloat(rating.sum) / parseFloat(rating.co);
                 var query = mysql.format("UPDATE product_details SET cum_rating = ? where product_id = ?",
                     [avg, params.product_id]);
                 conn.query(query, (err, rows) => {
