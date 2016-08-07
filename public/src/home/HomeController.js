@@ -30,11 +30,13 @@
 					});
 
 			};
-			self.addToCart = function(pro_id) {
+
+            self.addToCart = function(pro_id) {
 				$window.localStorage.setItem('cart',pro_id);
 
 			};
-			self.addToWishlist = function (pro_id){
+
+            self.addToWishlist = function (pro_id){
 				Wishlist.postWishes()
 					.then(function(response){
 						console.log(response);
@@ -42,5 +44,15 @@
 						console.log(reason);
 					});
 			};
+
+            self.search = function () {
+                Home.getSearch(self.query)
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (reason) {
+                        console.log(reason);
+                    });
+            }
 		});
 })();
